@@ -5,6 +5,9 @@
   "repository": "https://github.com/rookasrudzianskas/twitter-back.git",
   "author": "Rokas <rookas.rudzenskas@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --exec ts-node index.ts"
+  },
   "dependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^20.0.0",
