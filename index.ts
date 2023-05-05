@@ -3,13 +3,13 @@ import userRoutes from "./routes/userRoutes";
 
 const app = express();
 app.use(express.json());
-app.use(userRoutes);
+app.use('/user', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// For the creating user
-app.post('/user', (req, res) => {
-  res.status(501).json({ message: 'Not implemented' });
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
