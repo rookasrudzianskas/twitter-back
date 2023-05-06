@@ -66,10 +66,12 @@ router.put('/:id', async (req, res) => {
 });
 
 // delete the user
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async(req, res) => {
   const {id} = req.params;
   await prisma.user.delete({ where: { id: Number(id) } });
   res.sendStatus(200);
 });
+
+// get all tweets of a user
 
 export default router;
