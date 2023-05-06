@@ -50,15 +50,26 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update the user
-router.put('/:id', (req, res) => {
-  const {id} = req.params;
-  res.status(501).json({ message: `Not implemented ${id}` });
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { bio, name, image } = req.body;
+
+  try {
+    const result = await prisma.user.update({
+      where: { id: Number(id) },
+      data: { bio, name, image },
+    });
+    res.json(result);
+  } catch (e) {
+    res.status(400).json({ error: `Failed to update the user` });
+  }
 });
 
 // delete the user
 router.delete('/:id', (req, res) => {
   const {id} = req.params;
-  res.status(501).json({ message: `Not implemented ${id}` });
+  await prisma.user.delete({ where: { id: Number(id) } });
+  res.sendStatus(200);
 });
 
 export default router;
