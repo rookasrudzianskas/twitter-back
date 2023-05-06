@@ -21,5 +21,15 @@ model User {
 }
 
 model Tweet {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
+  content String
+  image String?
+
+  impression Int @default(0)
+
+  userId Int
+  user User @relation(fields: [userId], references: [id])
 }
