@@ -12,12 +12,17 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   email String @unique
   name String
   username String
   image String?
   bio String?
   isVerified Boolean @default(false)
+
+  tweets: Tweet[]
 }
 
 model Tweet {
