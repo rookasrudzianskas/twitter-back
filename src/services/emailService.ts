@@ -31,15 +31,17 @@ function createSendEmailCommand(
 export async function sendEmailToken(email: string, token: string) {
   console.log('email: ', email, token);
 
-  const message = `Your one time password is ${token}`;
-  const command = createEmailCommand(email, 'hello.rokastech@gmail.com', message);
+  const message = `Your one time password: ${token}`;
+  const command = createSendEmailCommand(
+    email,
+    'hello.rokastech@gmail.com',
+    message
+  );
 
   try {
     return await ses.send(command);
   } catch (e) {
-    console.log(`Error sending email: ${e}`);
-    return e;
+    console.log('Error sending email', e);
+    return error;
   }
-};
-
-sendEmailToken('hello.rokastech@gmail.com', 'test');
+}
