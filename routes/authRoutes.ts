@@ -45,12 +45,21 @@ router.post('/login', async (req, res) => {
           connectOrCreate: {
             where: { email },
             create: { email },
-          }
-        }
+          },
+        },
       },
     });
 
-
+    console.log(createdToken);
+    // TODO send emailToken to user's email
+    // await sendEmailToken(email, emailToken);
+    res.sendStatus(200);
+  } catch (e) {
+    console.log(e);
+    res
+      .status(400)
+      .json({ error: "Couldn't start the authentication process" });
+  }
 });
 
 export default router;
