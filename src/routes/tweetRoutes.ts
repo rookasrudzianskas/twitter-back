@@ -9,31 +9,24 @@ const prisma = new PrismaClient();
 // Create Tweet
 router.post('/', async (req, res) => {
   const { content, image } = req.body;
-  const authHeader = req.headers['authorization'];
-  const jwtToken = authHeader?.split(" ")[1];
-
-  if(!jwtToken) {
-    return res.status(401).json({ error: 'Not Authorized' });
-  }
-
   // @ts-ignore
   const user = req.user;
 
-  res.sendStatus(200);
-  // try {
-  //   const result = await prisma.tweet.create({
-  //     data: {
-  //       content,
-  //       image,
-  //       userId: user.id,
-  //     },
-  //   });
-  //
-  //   res.json(result);
-  // } catch (e) {
-  //   res.status(400).json({ error: 'Username and email should be unique' });
-  // }
+  try {
+    const result = await prisma.tweet.create({
+      data: {
+        content,
+        image,
+        userId: user.id,
+      },
+    });
+
+    res.json(result);
+  } catch (e) {
+    res.status(400).json({ error: 'Username and email should be unique' });
+  }
 });
+
 
 // list Tweet
 router.get('/', async (req, res) => {
