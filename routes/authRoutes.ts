@@ -77,19 +77,18 @@ router.post('/authenticate', async (req, res) => {
     },
   });
 
+  // Here we validated that the user is the owner of the email
   if (!dbEmailToken || !dbEmailToken.valid) {
     return res.sendStatus(401);
   }
 
-  // if (dbEmailToken.expiration < new Date()) {
-  //   return res.status(401).json({ error: 'Token expired!' });
-  // }
-  //
-  // if (dbEmailToken?.user?.email !== email) {
-  //   return res.sendStatus(401);
-  // }
+  if (dbEmailToken.expiration < new Date()) {
+    return res.status(401).json({ error: 'Token expired!' });
+  }
 
-  // Here we validated that the user is the owner of the email
+  if (dbEmailToken?.user?.email !== email) {
+    return res.sendStatus(401);
+  }
 
   // generate an API token
   const expiration = new Date(
