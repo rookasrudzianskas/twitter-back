@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
@@ -76,10 +77,10 @@ router.post('/authenticate', async (req, res) => {
     },
   });
 
-  // if (!dbEmailToken || !dbEmailToken.valid) {
-  //   return res.sendStatus(401);
-  // }
-  //
+  if (!dbEmailToken || !dbEmailToken.valid) {
+    return res.sendStatus(401);
+  }
+
   // if (dbEmailToken.expiration < new Date()) {
   //   return res.status(401).json({ error: 'Token expired!' });
   // }
