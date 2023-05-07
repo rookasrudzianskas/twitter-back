@@ -106,16 +106,16 @@ router.post('/authenticate', async (req, res) => {
     },
   });
 
-  // // Invalidate the email
-  // await prisma.token.update({
-  //   where: { id: dbEmailToken.id },
-  //   data: { valid: false },
-  // });
-  //
-  // // generate the JWT token
-  // const authToken = generateAuthToken(apiToken.id);
+  // Invalidate the email
+  await prisma.token.update({
+    where: { id: dbEmailToken.id },
+    data: { valid: false },
+  });
 
-  // res.json({ authToken });
+  // generate the JWT token
+  const authToken = generateAuthToken(apiToken.id);
+
+  res.json({ authToken });
 });
 
 export default router;
