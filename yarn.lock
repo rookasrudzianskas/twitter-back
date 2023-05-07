@@ -56,7 +56,7 @@
     "@aws-sdk/types" "3.310.0"
     tslib "^2.5.0"
 
-"@aws-sdk/client-ses@^3.327.0":
+"@aws-sdk/client-ses@^3.328.0":
   version "3.328.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-ses/-/client-ses-3.328.0.tgz#06049110791f5e5447d0220f2d0851553aa19e25"
   integrity sha512-4yW97Qi2/KZxfLPqy1Brm+U3XHlXJwkoKIsEdcowoGvkhstWHZQWk/ZmJNVbfZWUqtki7vwtWgTbJUDvKxM8oA==
