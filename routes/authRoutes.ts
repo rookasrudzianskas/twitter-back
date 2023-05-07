@@ -27,6 +27,29 @@ function generateAuthToken(tokenId: number): string {
 // Create a user, if it doesn't exist,
 // generate the emailToken and send it to their email
 router.post('/login', async (req, res) => {
+  const { email } = req.body;
+
+  // generate token
+  const emailToken = generateEmailToken();
+  const expiration = new Date(
+    new Date().getTime() + EMAIL_TOKEN_EXPIRATION_MINUTES * 60 * 1000
+  );
+
+  try {
+    const createdToken = await prisma.token.create({
+      data: {
+        type: 'EMAIL',
+        emailToken,
+        expiration,
+        user: {
+          connectOrCreate: {
+            where: { email },
+            create: { email },
+          }
+        }
+      },
+    });
+
 
 });
 
