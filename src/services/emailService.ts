@@ -30,7 +30,6 @@ function createSendEmailCommand(
 }
 export async function sendEmailToken(email: string, token: string) {
   console.log('email: ', email, token);
-
   const message = `Your one time password: ${token}`;
   const command = createSendEmailCommand(
     email,

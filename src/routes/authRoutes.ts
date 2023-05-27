@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
-import {sendEmailToken} from "../services/emailService";
+import { sendEmailToken } from '../services/emailService';
 
 const EMAIL_TOKEN_EXPIRATION_MINUTES = 10;
 const AUTHENTICATION_EXPIRATION_HOURS = 12;
@@ -77,7 +77,6 @@ router.post('/authenticate', async (req, res) => {
     },
   });
 
-  // Here we validated that the user is the owner of the email
   if (!dbEmailToken || !dbEmailToken.valid) {
     return res.sendStatus(401);
   }
@@ -89,6 +88,8 @@ router.post('/authenticate', async (req, res) => {
   if (dbEmailToken?.user?.email !== email) {
     return res.sendStatus(401);
   }
+
+  // Here we validated that the user is the owner of the email
 
   // generate an API token
   const expiration = new Date(
